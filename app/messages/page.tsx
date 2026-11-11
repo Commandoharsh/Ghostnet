@@ -28,7 +28,7 @@ export default function MessagesPage() {
   useEffect(() => { refresh(); const onOnline = () => { void runSync(); }; window.addEventListener("online", onOnline); return () => window.removeEventListener("online", onOnline); }, []);
   async function sendMessage() {
     if (!body.trim()) return;
-    const message: QueuedMessage = { id: crypto.randomUUID(), senderId: "GN-LOCAL-001", destinationId: "broadcast", body: body.trim(), priority, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now()+24*60*60*1000).toISOString(), state: "queued" };
+    const message: QueuedMessage = { id: crypto.randomUUID(), senderId: process.env.NEXT_PUBLIC_GHOSTNET_NODE_ID || "GN-LOCAL-001", destinationId: "broadcast", body: body.trim(), priority, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now()+24*60*60*1000).toISOString(), state: "queued" };
     await enqueueMessage(message);
     setBody("");
     setStatus("Saved to this device before network transmission.");

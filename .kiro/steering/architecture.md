@@ -15,3 +15,5 @@ Use a modular monolith for the initial application and preserve clear boundaries
 Messages must carry stable IDs, source/destination, creation and expiry timestamps, priority, hop count, maximum hops, and payload. Low-bandwidth transports require compact encoding and bounded packet sizes.
 
 Do not duplicate existing implementations. Inspect the repository before changing it. Keep the existing dashboard and message center functional. A local web app cannot independently access all radio hardware; use a native device agent or gateway where required.
+
+The web application is strictly an interface, not the network. GhostNet must be capable of starting, creating messages, discovering reachable peers, transmitting messages, receiving messages and storing messages without an internet connection or cloud dependency. Networking engine logic must remain independent of Next.js, React, or browser APIs.
